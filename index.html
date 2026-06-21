@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coming Soon</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body{
+        min-height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:linear-gradient(135deg,#0f172a,#1e293b);
+        overflow:hidden;
+        color:#fff;
+        position:relative;
+    }
+
+    /* Animated background circles */
+    .circle{
+        position:absolute;
+        border-radius:50%;
+        background:rgba(255,255,255,0.05);
+        animation:float 12s infinite ease-in-out;
+    }
+
+    .circle:nth-child(1){
+        width:300px;
+        height:300px;
+        top:-100px;
+        left:-100px;
+    }
+
+    .circle:nth-child(2){
+        width:250px;
+        height:250px;
+        bottom:-80px;
+        right:-80px;
+        animation-delay:2s;
+    }
+
+    .circle:nth-child(3){
+        width:180px;
+        height:180px;
+        top:20%;
+        right:15%;
+        animation-delay:4s;
+    }
+
+    @keyframes float{
+        0%,100%{
+            transform:translateY(0);
+        }
+        50%{
+            transform:translateY(-30px);
+        }
+    }
+
+    .container{
+        text-align:center;
+        padding:40px;
+        width:90%;
+        max-width:700px;
+        z-index:1;
+    }
+
+    .tag{
+        display:inline-block;
+        padding:10px 22px;
+        border:1px solid rgba(255,255,255,0.2);
+        border-radius:50px;
+        background:rgba(255,255,255,0.08);
+        backdrop-filter:blur(10px);
+        font-size:14px;
+        letter-spacing:2px;
+        text-transform:uppercase;
+    }
+
+    h1{
+        font-size:clamp(2.5rem,8vw,5rem);
+        margin:25px 0 15px;
+        font-weight:700;
+    }
+
+    p{
+        font-size:1.1rem;
+        color:#cbd5e1;
+        line-height:1.8;
+        max-width:550px;
+        margin:auto;
+    }
+
+    .countdown{
+        margin-top:40px;
+        display:flex;
+        justify-content:center;
+        gap:20px;
+        flex-wrap:wrap;
+    }
+
+    .box{
+        width:100px;
+        padding:18px;
+        border-radius:16px;
+        background:rgba(255,255,255,0.08);
+        backdrop-filter:blur(10px);
+    }
+
+    .box h2{
+        font-size:2rem;
+        margin-bottom:5px;
+    }
+
+    .box span{
+        font-size:0.85rem;
+        color:#cbd5e1;
+        text-transform:uppercase;
+        letter-spacing:1px;
+    }
+
+    footer{
+        margin-top:50px;
+        color:#94a3b8;
+        font-size:0.9rem;
+    }
+
+    @media(max-width:480px){
+        .box{
+            width:80px;
+        }
+
+        .box h2{
+            font-size:1.6rem;
+        }
+
+        p{
+            font-size:1rem;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+
+<div class="container">
+
+    <div class="tag">Coming Soon</div>
+
+    <h1>New Training Institute</h1>
+
+    <p>
+        We are preparing something exciting for learners, professionals,
+        and future innovators. Stay tuned for our launch.
+    </p>
+
+    <div class="countdown">
+        <div class="box">
+            <h2 id="days">00</h2>
+            <span>Days</span>
+        </div>
+
+        <div class="box">
+            <h2 id="hours">00</h2>
+            <span>Hours</span>
+        </div>
+
+        <div class="box">
+            <h2 id="minutes">00</h2>
+            <span>Minutes</span>
+        </div>
+
+        <div class="box">
+            <h2 id="seconds">00</h2>
+            <span>Seconds</span>
+        </div>
+    </div>
+
+    <footer>
+        Launching Soon 🚀
+    </footer>
+
+</div>
+
+<script>
+    // Set launch date
+    const launchDate = new Date("December 31, 2026 00:00:00").getTime();
+
+    const timer = setInterval(() => {
+
+        const now = new Date().getTime();
+        const distance = launchDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerHTML = days;
+        document.getElementById("hours").innerHTML = hours;
+        document.getElementById("minutes").innerHTML = minutes;
+        document.getElementById("seconds").innerHTML = seconds;
+
+        if(distance < 0){
+            clearInterval(timer);
+            document.querySelector(".countdown").innerHTML =
+                "<h2>We're Live!</h2>";
+        }
+
+    }, 1000);
+</script>
+
+</body>
+</html>
